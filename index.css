@@ -1,0 +1,270 @@
+:root {
+  --dark: rgb(109 60 29);
+  --darker: rgb(75 39 12);
+  --light: rgb(239 209 155);
+  --lighter: rgb(236 217 183);
+  --yellow: rgb(240 192 32);
+  --light-green: rgb(128 240 128);
+  --dark-green: rgb(32 192 32);
+  --font-face: serif;
+}
+body {
+  display: flex;
+}
+game {
+  width: 600px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+mainarea {
+  width: 600px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+}
+gamearea {
+  position: relative;
+  width: 500px;
+  height: 600px;
+}
+ranger, sentinel {
+  font-family: var(--font-face);
+  height: 50px;
+  width: 50px;
+  display: flex;
+  background: var(--light);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 2.5em;
+}
+board {
+  display: flex;
+  position: absolute;
+  width: 500px;
+  height: 600px;
+  align-items: center;
+  overflow: hidden;
+}
+center {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 50%;
+}
+halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translateX(-50%) translateY(-50%);
+  background: var(--dark);
+  border-radius: 50%;
+  z-index: 1;
+  clip-path: circle(50%);
+}
+halo outer {
+  overflow: hidden;
+  border-radius: 50%;
+}
+halo.small {
+  width: 40%;
+  height: 40%;
+}
+halo.outer {
+  width: 95%;
+  height: 95%;
+}
+halo.inner {
+  width: 75%;
+  height: 75%;
+}
+halo outer > div {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+halo inner {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background: var(--cyan);
+  border-radius: 50%;
+}
+segment {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vw;
+  background: var(--light);
+  transform-origin: 0 0;
+  -webkit-transition: all var(--speed) ease-in-out;
+  -moz-transition: all var(--speed) ease-in-out;
+  -o-transition: all var(--speed) ease-in-out;
+  transition: all var(--speed) ease-in-out;
+  z-index: 0;
+}
+black, white {
+  width: 500px;
+}
+row {
+  display: flex;
+}
+cell {
+  display: flex;
+  width: 100px;
+  height: 70px;
+  background: var(--light);
+  align-items: center;
+  justify-content: center;
+}
+row:nth-child(2n-1) cell:nth-child(2n), row:nth-child(2n) cell:nth-child(2n+1), segment.dark {
+  background: var(--dark);
+}
+segment.allowed, cell.allowed, ranger.allowed, sentinel.allowed {
+  background: var(--light-green);
+}
+row:nth-child(2n-1) cell:nth-child(2n).allowed, row:nth-child(2n) cell:nth-child(2n+1).allowed, segment.dark.allowed, halo.small.allowed {
+  background: var(--dark-green);
+}
+segment:hover, halo.small:hover, cell:hover, row:nth-child(2n-1) cell:nth-child(2n):hover, row:nth-child(2n) cell:nth-child(2n+1):hover, ranger:hover, sentinel:hover {
+  background: var(--yellow);
+  cursor: pointer;
+}
+piece-element {
+  height: 30px;
+  width: 30px;
+  border: 3px solid var(--darker);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 2;
+  font-family: var(--font-face);
+  text-align: center;
+  align-content: center;
+  font-size: 1.6em;
+  font-weight: bold;
+  color: var(--darker);
+}
+piece-element:hover {
+  cursor: pointer;
+}
+piece-element.black {
+  background: var(--darker);
+  color: var(--lighter);
+}
+piece-element.white  {
+  background: var(--lighter);
+}
+piece-element.active {
+  box-shadow: 0px 0px 15px;
+  background: var(--yellow);
+}
+button-popup {
+  position: absolute;
+  top: -20px;
+  z-index: 4;
+}
+button-popup button {
+  cursor: pointer;
+  border-radius: 10px 10px 10px 0;
+  padding: 9px;
+  z-index: 9;
+  position: absolute;
+  transform: translateZ(0);
+}
+game-info {
+  margin-left: 0.8em;
+}
+infotable {
+  display: flex;
+  flex-direction: column;
+}
+turnlog {
+  display: flex;
+  flex-direction: column;
+}
+log-move {
+  margin-right: 10px;
+}
+popup {
+  display: flex;
+  position: absolute;
+  background: #ffffff;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border: 1px solid #000;
+  border-radius: 0.3em;
+  padding: 2em;
+  box-shadow: 0px 4px 13px;
+}
+popup closebutton:after {
+  content: "X";
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.3em;
+  cursor: pointer;
+}
+popup closebutton:after:hover {
+  box-shadow: 0px 0px 4px;
+}
+options help:after {
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  content: "?";
+  display: flex;
+  border: 1px solid var(--darker);
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4em;
+}
+popupwrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+tutorialcontent {
+  position: relative;
+}
+tutorial-page {
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+}
+tutorial-page.active {
+  display: flex;
+  z-index: 5;
+}
+tutorial {
+  display: flex;
+  flex-direction: column;
+}
+tutorial-entry {
+  margin: 0.3em 0;
+  display: flex;
+}
+next {
+  cursor: pointer;
+}
