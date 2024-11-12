@@ -1,0 +1,30 @@
+{
+  "instructions": [
+    "## How to play",
+    "In this game, two players face off in a strategic contest to gain control of the center. The game board consists of two starting positions and a center area where the most action occurs. The center area has one central cell and three circles around it, each having 20 cells.",
+    "Each player starts with 15 pieces called :pawn placed in three rows, five pieces in each. Pieces can move one step to any cell adjacent to their current cell, having one common edge. The center cell is adjacent to all cells of the inner circle.",
+    "![Pawn](images/pawn.png)",
+    "If a piece moves to the cell occupied by an opponent's piece, that piece is taken, and removed from the board.",
+    "---",
+    "## Promotions",
+    "Pieces can be promoted to have a different role than the :pawn. Promotions can happen either by reaching a specific cell or by moving pieces in a specific formation.",
+    "If three pieces are placed in line on adjanced cells (on the same line or circle) and the middle piece of these three pieces is not promoted and is not in the home area, then it can be promoted to :horseman. The promotion takes one turn. The :horseman piece is marked by a :horseman_title character on it. It can move up to :horseman_steps steps at a time.",
+    "![Promotion formation](images/promotion.png) ![Horseman](images/horseman.png)",
+    "---",
+    "If a piece reaches the :ranger promotion cell (a round cell at the left side of a center area, marked by a :ranger_title), then it is promoted to a :ranger. This promotion happens automatically and doesn't require a turn. The :ranger piece ir marked by a :ranger_title character. This piece can move up to :ranger_steps steps and can jump over other pieces.",
+    "![Ranger](images/ranger.png)",
+    "---",
+    "If a piece reaches the :sentinel promotion cell (a round cell at the right side of a center area, marked by a :sentinel_title), then it is promoted to a :sentinel. Similarly to the :ranger promotion, this promotion happens automatically and doesn't require a turn. The :sentinel piece is marked by a :sentinel_title character and can move one step.",
+    "![Sentinel](images/sentinel.png)",
+    "---",
+    "The :sentinel piece can revive piece taken on previous turn, if the taken piece was on the adjanced cell to :sentinel. The process effectively rolls back the previous turn, putting the taken piece back and moving the opponent's piece to the position wherefrom it made an attack. The revived piece cannot be taken on the next turn, and it loses any promotion if it had any before being taken. There can be only one :sentinel piece per player. If a :sentinel piece is taken, player can promote other piece to become :sentinel.",
+    "![video](images/sentinel.mp4)",
+    "---",
+    "## Objectives",
+    "The main objective of a game is to establish a control over a center. It is done by placing any promoted piece to the center and any two pieces in two opposite cells of an inner circle. This position must be held for three consecutive turns.",
+    "![Winning position](images/winning.png)",
+    "If any of the two pieces in an inner circle is taken and then revived by a :sentinel then the victory counter does not reset. However, if any of these pieces is moved or taken and not revived, then the counter resets.",
+    "## Draw",
+    "Draw is called automatically when any of the players has less than three pieces left, thus he cannot possibly win. Draw can also be called at any time, if both players agree."
+  ]
+}

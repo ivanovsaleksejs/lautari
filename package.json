@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "element": "ivanovsaleksejs/element.js",
+    "esbuild": "^0.19.10",
+    "ncp": "^2.0.0",
+    "nodemon": "^3.0.2"
+  },
+  "scripts": {
+    "build": "node build.js && terser dist/index.js --compress --mangle --toplevel --output dist/index.js",
+    "dev": "nodemon --watch src --exec 'yarn build'"
+  },
+  "devDependencies": {
+    "terser": "^5.26.0"
+  },
+  "nodemonConfig": {
+    "ext": "js,html,css,ico,woff2,png,json"
+  }
+}

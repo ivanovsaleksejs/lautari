@@ -1,0 +1,5 @@
+config.json.*
+index.css.*
+node_modules
+dist
+font.woff2
