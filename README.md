@@ -2,6 +2,8 @@
 
 Lautari is a board game for control over a central area of a board, where two players compete by maneuvering pieces and attempting to secure a winning formation. Players can promote their pieces, adding complexity and tactical depth to dominate the board. The game requires both careful planning and timely moves, with each player's choices affecting the dynamic and outcome of the match.
 
+To build the project locally, run `yarn && yarn build` if you are using yarn, or `npm install && npm run build`. The project will be built into `dist` directory.
+
 A working demo (playable on local device) can be found [here](https://ivanovsaleksejs.github.io/lautari/).
 
 ---
@@ -42,7 +44,7 @@ If a piece reaches the Sentinel promotion cell (a circular cell on the right sid
 
 The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was adjacent to the Sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel.
 
-https://github.com/user-attachments/assets/f6f2aaa6-c0a3-4a82-a4ce-ef4700b47a8b
+![video](src/images/sentinel.mp4)
 
 ---
 
