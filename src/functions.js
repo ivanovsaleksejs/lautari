@@ -1,10 +1,7 @@
 /* A super primitive markdown to HTML converter */
 const markdownToHtml = (md, substitutions = {}) =>
 {
-  for (const [key, value] of Object.entries(substitutions)) {
-    const placeholder = new RegExp(`:${key}`, 'g')
-    md = md.replace(placeholder, value)
-  }
+  md = substitute(md, substitutions)
 
   md = md.replace(/!\[video\]\((.+?)\)/g, '<video controls src="$1"></video>')
 
@@ -21,6 +18,15 @@ const markdownToHtml = (md, substitutions = {}) =>
 
   md = md.replace(/\n/g, '')
   return md
+}
+
+const substitute = (line, substitutions = {}) =>
+{
+  for (const [key, value] of Object.entries(substitutions)) {
+    const placeholder = new RegExp(`:${key}`, 'g')
+    line = line.replace(placeholder, value)
+  }
+  return line
 }
 
 const charFile = (pos, files) => files[pos]
@@ -43,4 +49,4 @@ const splitList = (arr, delimiter) =>
 /* Capitalizes string */
 const capitalize = s => s[0].toUpperCase() + s.slice(1)
 
-export { markdownToHtml, splitList, charFile, ordFile, capitalize }
+export { markdownToHtml, substitute, splitList, charFile, ordFile, capitalize }

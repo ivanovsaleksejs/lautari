@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "element": "ivanovsaleksejs/element.js",
     "esbuild": "^0.19.10",
@@ -7,7 +8,8 @@
   },
   "scripts": {
     "build": "node build.js && terser dist/index.js --compress --mangle --toplevel --output dist/index.js",
-    "dev": "nodemon --watch src --exec 'yarn build'"
+    "dev": "nodemon --watch src --exec 'yarn build'",
+    "build-md": "node build-md.js"
   },
   "devDependencies": {
     "terser": "^5.26.0"

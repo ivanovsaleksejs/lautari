@@ -1,13 +1,18 @@
-const { build } = require('esbuild');
-const ncp = require('ncp').ncp;
-const path = require('path');
-const fs = require('fs');
+import { build } from 'esbuild'
+import pkg from 'ncp'
+const { ncp } = pkg
+import path from 'path'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
 
-const srcDir = path.resolve(__dirname, 'src');
-const distDir = path.resolve(__dirname, 'dist');
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const srcDir = path.resolve(__dirname, 'src')
+const distDir = path.resolve(__dirname, 'dist')
 
 if (fs.existsSync(distDir)) {
-  fs.rmSync(distDir, { recursive: true });
+  fs.rmSync(distDir, { recursive: true })
 }
 
 build({
@@ -23,5 +28,5 @@ build({
   ncp(path.join(srcDir, 'index.html'), path.join(distDir, 'index.html'))
   //ncp(path.join(srcDir, 'elements'), path.join(distDir, 'elements'))
   console.log("Build successful")
-}).catch(() => process.exit(1));
+}).catch(() => process.exit(1))
 
