@@ -35,7 +35,7 @@ const processInstructions = async jsonFilePaths =>
       allInstructions.push(...processedInstructions)
     }
 
-    const markdownContent = allInstructions.join('\n')
+    const markdownContent = allInstructions.join('\n\n')
 
     const outputFilePath = path.join(process.cwd(), 'README.md')
     await fs.promises.writeFile(outputFilePath, markdownContent, 'utf-8')
@@ -46,7 +46,7 @@ const processInstructions = async jsonFilePaths =>
   }
 }
 
-const jsonFilePaths = process.argv.slice(2) // Arguments after "node build-md.js"
+const jsonFilePaths = process.argv.slice(2)
 
 if (jsonFilePaths.length === 0) {
   console.error('Error: Please provide at least one JSON file path as an argument.')
