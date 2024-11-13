@@ -209,6 +209,9 @@ popup {
   border-radius: 0.3em;
   padding: 2em;
   box-shadow: 0px 4px 13px;
+  max-height: 85vh;
+  flex-direction: column;
+  align-items: flex-start;
 }
 popup closebutton:after {
   content: "X";
@@ -247,6 +250,7 @@ popupwrapper {
 }
 tutorialcontent {
   position: relative;
+  overflow-y: scroll;
 }
 tutorial-page {
   z-index: 5;
@@ -267,4 +271,8 @@ tutorial-entry {
 }
 next {
   cursor: pointer;
+  border: 1px solid var(--darker);
+  border-radius: 0.3em;
+  margin: 0.3em 0;
+  padding: 0.2em 0.8em;
 }
