@@ -234,7 +234,7 @@ debug@^4:
 
 element@ivanovsaleksejs/element.js:
   version "1.0.0"
-  resolved "https://codeload.github.com/ivanovsaleksejs/element.js/tar.gz/b76bcc1ec7efc74ec805a90028f57e1a041bb699"
+  resolved "https://codeload.github.com/ivanovsaleksejs/element.js/tar.gz/758204e7cc9c1de91e21a321bd805fd93e7d93df"
 
 esbuild@^0.19.10:
   version "0.19.12"
