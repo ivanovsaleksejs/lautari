@@ -20,7 +20,7 @@ If a piece moves to a cell occupied by an opponent's piece, that piece is captur
 
 ---
 
-## Promotions
+### Promotions
 
 Pieces can be promoted to have a different role than the Pawn. Promotions can occur by reaching specific cells or by arranging pieces in specific formations.
 
@@ -30,11 +30,15 @@ If three pieces are placed in a line on adjacent cells (either along the same li
 
 ---
 
+### Ranger
+
 If a piece reaches the Ranger promotion cell (a circular cell on the left side of the center area, marked by a ⇯), it is promoted to a Ranger automatically, without requiring a turn. The Ranger piece is marked by a ⇯ symbol. This piece can move up to 3 steps and can jump over other pieces.
 
 ![Ranger](src/images/ranger.png)
 
 ---
+
+### Sentinel
 
 If a piece reaches the Sentinel promotion cell (a circular cell on the right side of the center area, marked by a +), it is promoted to a Sentinel automatically, also without requiring a turn. The Sentinel piece is marked by a + symbol and can move one step.
 
@@ -42,13 +46,15 @@ If a piece reaches the Sentinel promotion cell (a circular cell on the right sid
 
 ---
 
+### Sentinel feature
+
 The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was adjacent to the Sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel.
 
-![video](src/images/sentinel.mp4)
+https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2
 
 ---
 
-## Objectives
+### Main objective
 
 The main objective of the game is to gain control over the center. This is achieved by placing a promoted piece in the center and positioning any two pieces in two opposite cells within the inner circle. This configuration must be maintained for three consecutive turns to secure victory.
 
@@ -56,6 +62,6 @@ The main objective of the game is to gain control over the center. This is achie
 
 If either of the two pieces in the inner circle is captured and then revived by a Sentinel, the victory counter does not reset. However, if any of these pieces is moved, captured, and not revived, the counter resets.
 
-## Draw
+### Draw
 
 A draw is declared automatically if a player has fewer than four pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree.

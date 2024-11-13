@@ -19,6 +19,7 @@ class Tutorial extends Element
         name: "tutorial-entry",
         props : {
           innerHTML: markdownToHtml(entry, {
+            "video": "![video](images/sentinel.mp4)",
             "pawn": capitalize(config.promotions.pawn.name),
             "horseman_title": config.promotions.horseman.title,
             "horseman_steps": config.promotions.horseman.steps,

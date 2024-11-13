@@ -20,6 +20,7 @@ const processInstructions = async jsonFilePaths =>
 
       const processedInstructions = jsonObject.instructions.map(line =>
         line = substitute(line.replace(/images\/([^\s)]+)/g, 'src/images/$1'), {
+          "video": "https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2",
           "pawn": capitalize(config.promotions.pawn.name),
           "horseman_title": config.promotions.horseman.title,
           "horseman_steps": config.promotions.horseman.steps,

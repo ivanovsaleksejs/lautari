@@ -7,6 +7,7 @@ const markdownToHtml = (md, substitutions = {}) =>
 
   md = md.replace(/!\[(.*?)\]\((.+?)\)/g, '<img src="$2" alt="$1">')
 
+  md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>')
   md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>')
   md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>')
 
