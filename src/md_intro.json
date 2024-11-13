@@ -2,6 +2,7 @@
   "instructions": [
     "## Lautari",
     "Lautari is a board game for control over a central area of a board, where two players compete by maneuvering pieces and attempting to secure a winning formation. Players can promote their pieces, adding complexity and tactical depth to dominate the board. The game requires both careful planning and timely moves, with each player's choices affecting the dynamic and outcome of the match.",
+    "A working demo (playable on local device) can be found [here](https://ivanovsaleksejs.github.io/lautari/).",
     "---"
   ]
 }
