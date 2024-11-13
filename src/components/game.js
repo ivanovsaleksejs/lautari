@@ -148,7 +148,7 @@ class Game extends Element
 
   checkDraw = _ =>
   {
-    return state.taken["white"].length > 12 || state.taken["black"].length > 12
+    return state.taken["white"].length > 11 || state.taken["black"].length > 11
   }
 
   changePlayer = _ =>
