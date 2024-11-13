@@ -126,7 +126,7 @@ class Game extends Element
       }
 
       if (winningPosition) {
-        if (centerOwner) {
+        if (centerOwner !== null) {
           let color = centerOwner ? "white" : "black"
           let turns = state.gameInfo.center[color] + 1
 
