@@ -4,7 +4,7 @@ Lautari is a board game for control over a central area of a board, where two pl
 
 To build the project locally, run `yarn && yarn build` if you are using yarn, or `npm install && npm run build`. The project will be built into `dist` directory.
 
-A working demo (playable on local device) can be found [here](https://ivanovsaleksejs.github.io/lautari/).
+A working demo (playable locally, no multiplayer yet) can be found [here](https://ivanovsaleksejs.github.io/lautari/).
 
 ---
 
