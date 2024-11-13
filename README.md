@@ -44,7 +44,7 @@ If a piece reaches the Sentinel promotion cell (a circular cell on the right sid
 
 The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was adjacent to the Sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel.
 
-![video](src/images/sentinel.mp4)
+https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2
 
 ---
 
