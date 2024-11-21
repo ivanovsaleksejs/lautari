@@ -56,7 +56,7 @@ https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2
 
 ### Main objective
 
-The main objective of the game is to gain control over the center. This is achieved by placing a promoted piece in the center and positioning any two pieces in two opposite cells within the inner circle. This configuration must be maintained for three consecutive turns to secure victory.
+The main objective of the game is to gain control of the center. This is accomplished by placing a promoted piece in the center and positioning any two pieces in opposite cells within the inner circle. This configuration must remain intact for one turn to secure victory. For the black player, victory is automatic since the turn ends after their move. The white player, however, must ensure that black cannot disrupt the configuration during their turn. This rule balances the slight speed advantage white has at the start of the game.
 
 ![Winning position](src/images/winning.png)
 
@@ -64,4 +64,4 @@ If either of the two pieces in the inner circle is captured and then revived by 
 
 ### Draw
 
-A draw is declared automatically if a player has fewer than four pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree.
+A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree.

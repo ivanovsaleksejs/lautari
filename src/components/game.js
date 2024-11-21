@@ -133,7 +133,7 @@ class Game extends Element
           state.gameInfo.center[color] = turns
           state.gameInfo.infoTable.generalInfo.status.node.innerText = `${capitalize(color)} holds center for ${turns} turn${turns > 1 ? "s" : ""}`
 
-          if (state.gameInfo.center[color] == 3) {
+          if (state.gameInfo.center[color] == 1) {
             return {winner: centerOwner}
           }
         }
@@ -148,7 +148,7 @@ class Game extends Element
 
   checkDraw = _ =>
   {
-    return state.taken["white"].length > 11 || state.taken["black"].length > 11
+    return state.taken["white"].length > 12 || state.taken["black"].length > 12
   }
 
   changePlayer = _ =>
