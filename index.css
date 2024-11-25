@@ -29,7 +29,7 @@ gamearea {
   width: 500px;
   height: 600px;
 }
-ranger, sentinel {
+rider, sentinel {
   font-family: var(--font-face);
   height: 50px;
   width: 50px;
@@ -133,13 +133,13 @@ cell {
 row:nth-child(2n-1) cell:nth-child(2n), row:nth-child(2n) cell:nth-child(2n+1), segment.dark {
   background: var(--dark);
 }
-segment.allowed, cell.allowed, ranger.allowed, sentinel.allowed {
+segment.allowed, cell.allowed, rider.allowed, sentinel.allowed {
   background: var(--light-green);
 }
 row:nth-child(2n-1) cell:nth-child(2n).allowed, row:nth-child(2n) cell:nth-child(2n+1).allowed, segment.dark.allowed, halo.small.allowed {
   background: var(--dark-green);
 }
-segment:hover, halo.small:hover, cell:hover, row:nth-child(2n-1) cell:nth-child(2n):hover, row:nth-child(2n) cell:nth-child(2n+1):hover, ranger:hover, sentinel:hover {
+segment:hover, halo.small:hover, cell:hover, row:nth-child(2n-1) cell:nth-child(2n):hover, row:nth-child(2n) cell:nth-child(2n+1):hover, rider:hover, sentinel:hover {
   background: var(--yellow);
   cursor: pointer;
 }
@@ -195,8 +195,24 @@ turnlog {
   display: flex;
   flex-direction: column;
 }
+log-entry {
+  font-family: monospace;
+  box-sizing: border-box;
+  width: 23ch;
+  display: flex;
+  justify-content: space-between;
+}
 log-move {
-  margin-right: 10px;
+  width: 10ch;
+  font-family: monospace;
+}
+log-move:nth-child(2n) {
+  text-align: right;
+}
+log-separator {
+  width: 10%;
+  text-align: center;
+  font-family: monospace;
 }
 popup {
   display: flex;
