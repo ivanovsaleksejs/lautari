@@ -1,21 +1,19 @@
 {
   "instructions": [
-    "## How to play",
-    "In this game, two players face off in a strategic contest to control the center of the board. The game board consists of two starting positions and a center area where the most action occurs. The center area has one central cell surrounded by three circles, each containing 20 cells.",
-    "Each player starts with 15 pieces called :pawn, arranged in three rows of five pieces each. Pieces can move one step to any cell adjacent to their current cell that shares a common edge. The center cell is adjacent to all cells of the inner circle.",
-
-    "![Pawn](images/pawn.png)",
-    "If a piece moves to a cell occupied by an opponent's piece, that piece is captured and removed from the board.",
-
+    "### How to play",
+    "In this game, two players face off in a strategic contest to control the center of the board. The game board consists of two starting positions (home area), each having three rows, five cells in each, and a center area where the most action occurs. The center area has one central cell surrounded by three circles, each containing 20 cells. The center area connected to the home areas with two additional rows.",
+    "Each player begins the game with 15 pieces, called :pawn, arranged in three rows of five pieces each. One player controls the white pieces, while the other controls the black pieces. A :pawn can move one step to any adjacent cell that shares a common edge with its current position. The center cell is uniquely connected to all cells within the inner circle.",
+    "![Pawn](images/pawn.png) ![Center cell](images/center.png)",
+    "If a piece moves to a cell occupied by an opponent's piece, that piece is captured and removed from the board. Any piece can capture any other piece. There are no forced takes, meaning that the player can choose not to capture a piece even if they have that option.",
     "---",
     "### Promotions",
     "Pieces can be promoted to have a different role than the :pawn. Promotions can occur by reaching specific cells or by arranging pieces in specific formations.",
-    "If three pieces are placed in a line on adjacent cells (either along the same line or within the same circle) and the middle piece of these three pieces has not been promoted and is not in the home area, it can be promoted to :horseman. The promotion takes one turn. The :horseman piece is marked by a :horseman_title symbol. It can move up to :horseman_steps steps at a time.",
-    "![Promotion formation](images/promotion.png) ![Horseman](images/horseman.png)",
+    "If three pieces are placed in a straight line on adjacent cells connected by edges (either along the same row or within the same circle), the middle piece can be promoted to :infantry, provided it has not already been promoted and the middle cell is not in the home area. Note that diagonal placements do not qualify, as the cells must share edges to form a valid line. Additionally, the cells must form a continuous, straight alignment; configurations where cells are edge-connected but not in a straight line or an arc do not count. If the middle cell is the center cell of the board, the other two pieces must occupy cells that are directly opposite each other. The promotion takes one turn to complete, meaning that instead of moving any piece, player uses the turn to promote the piece. The :infantry piece is marked by a :infantry_title symbol and can move up to :infantry_steps steps at a time. Movement may not be in one direction, for example, piece can make a step forward and a step left.",
+    "![Promotion formation](images/promotion.png) ![Infantry](images/infantry.png)",
     "---",
-    "### Ranger",
-    "If a piece reaches the :ranger promotion cell (a circular cell on the left side of the center area, marked by a :ranger_title), it is promoted to a :ranger automatically, without requiring a turn. The :ranger piece is marked by a :ranger_title symbol. This piece can move up to :ranger_steps steps and can jump over other pieces.",
-    "![Ranger](images/ranger.png)",
+    "### :rider",
+    "If a piece reaches the :rider promotion cell (a circular cell on the left side of the center area, marked by a :rider_title), it is promoted to a :rider automatically, without requiring a turn. The :rider piece is marked by a :rider_title symbol. This piece can move up to :rider_steps steps and can jump over other pieces. Same as :infantry, :rider can make steps in different directions.",
+    "![:rider](images/rider.png)",
     "---",
     "### Sentinel",
     "If a piece reaches the :sentinel promotion cell (a circular cell on the right side of the center area, marked by a :sentinel_title), it is promoted to a :sentinel automatically, also without requiring a turn. The :sentinel piece is marked by a :sentinel_title symbol and can move one step.",
@@ -26,12 +24,10 @@
     ":video",
     "---",
     "### Main objective",
-    "The main objective of the game is to gain control of the center. This is accomplished by placing a promoted piece in the center and positioning any two pieces in opposite cells within the inner circle. This configuration must remain intact for one turn to secure victory. For the black player, victory is automatic since the turn ends after their move. The white player, however, must ensure that black cannot disrupt the configuration during their turn. This rule balances the slight speed advantage white has at the start of the game.",
+    "The main objective of the game is to gain control of the center. This is accomplished by placing a promoted piece in the center and positioning any two pieces in opposite cells within the inner circle. This configuration must remain intact for one turn to secure victory. For the black player, victory happens as soon as the configuration is made, since the turn ends after blacks move. The whites, however, must ensure that the blacks cannot disrupt the configuration during their turn - after the whites move and form the winning configuration, the blacks have a chance to take any of three pieces during the current turn. If they do not, the game is won by the whites. This rule balances the slight speed advantage whites have at the start of the game.",
     "![Winning position](images/winning.png)",
     "If either of the two pieces in the inner circle is captured and then revived by a :sentinel, the victory counter does not reset. However, if any of these pieces is moved, captured, and not revived, the counter resets.",
-
     "### Draw",
     "A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree."
-
   ]
 }

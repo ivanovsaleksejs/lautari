@@ -1,9 +1,7 @@
 {
   "instructions": [
     "## Lautari",
-    "Lautari is a board game for control over a central area of a board, where two players compete by maneuvering pieces and attempting to secure a winning formation. Players can promote their pieces, adding complexity and tactical depth to dominate the board. The game requires both careful planning and timely moves, with each player's choices affecting the dynamic and outcome of the match.",
-    "To build the project locally, run `yarn && yarn build` if you are using yarn, or `npm install && npm run build`. The project will be built into `dist` directory.",
-    "A working demo (playable locally, no multiplayer yet) can be found [here](https://ivanovsaleksejs.github.io/lautari/).",
+    "Lautari is a board game that combines simplicity of a design and ease of learning with strategic depth, offering players countless combinations and tactical opportunities. In this two-player game, opponents vie for control of a central area on the board by maneuvering their pieces and aiming to establish a winning formation. The ability to promote pieces and create a large variety of combinations adds layers of complexity and challenge. Success requires a balance of careful planning and timely execution, as every decision shapes the flow and outcome of the match. The game's complexity grows with the central cell's connection to all surrounding cells, enabling swift maneuvers and rapid formation changes. The victory conditions encourage thoughtful, deliberate strategies, rewarding players who rely on calculated combinations over reckless aggression.",
     "---"
   ]
 }

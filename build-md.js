@@ -22,12 +22,12 @@ const processInstructions = async jsonFilePaths =>
         line = substitute(line.replace(/images\/([^\s)]+)/g, 'src/images/$1'), {
           "video": "https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2",
           "pawn": capitalize(config.promotions.pawn.name),
-          "horseman_title": config.promotions.horseman.title,
-          "horseman_steps": config.promotions.horseman.steps,
-          "horseman": capitalize(config.promotions.horseman.name),
-          "ranger_title": config.promotions.ranger.title,
-          "ranger_steps": config.promotions.ranger.steps,
-          "ranger": capitalize(config.promotions.ranger.name),
+          "infantry_title": config.promotions.infantry.title,
+          "infantry_steps": config.promotions.infantry.steps,
+          "infantry": capitalize(config.promotions.infantry.name),
+          "rider_title": config.promotions.rider.title,
+          "rider_steps": config.promotions.rider.steps,
+          "rider": capitalize(config.promotions.rider.name),
           "sentinel_title": config.promotions.sentinel.title,
           "sentinel": capitalize(config.promotions.sentinel.name)
         })

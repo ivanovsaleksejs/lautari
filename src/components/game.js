@@ -33,7 +33,7 @@ class Game extends Element
     },
     mainarea: {
       children: {
-        ranger: new PromoCell(config.promotions.ranger.title, "ranger", config.promotions.ranger.position),
+        rider: new PromoCell(config.promotions.rider.title, "rider", config.promotions.rider.position),
         gamearea: {
           children: {
             board: {

@@ -1,5 +1,5 @@
 {
-  "files": "VBDEFGHIKLT",
+  "files": "RBDEFGHIKLS",
   "firstHomeFile": "E",
   "lastHomeFile": "I",
   "centerFile": "A",
@@ -8,23 +8,23 @@
       "name": "pawn",
       "steps": 1
     },
-    "horseman": {
+    "infantry": {
       "title": "⇧",
-      "name": "horseman",
+      "name": "infantry",
       "steps": 2,
       "canJump": false
     },
-    "ranger": {
+    "rider": {
       "title": "⇯",
-      "name": "ranger",
-      "position": "V4",
+      "name": "rider",
+      "position": "R4",
       "steps": 3,
       "canJump": true
     },
     "sentinel": {
       "title": "+",
       "name": "sentinel",
-      "position": "T11",
+      "position": "S11",
       "steps": 1
     }
   }

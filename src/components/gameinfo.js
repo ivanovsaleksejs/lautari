@@ -14,6 +14,13 @@ class LogMove extends Element
   }
 }
 
+class LogSeparator extends Element
+{
+  name = "log-separator"
+
+  props = { innerText: " - " }
+}
+
 class LogEntry extends Element
 {
   name = "log-entry"
@@ -58,11 +65,12 @@ class GameInfo extends Element
   }
 
   moveInfo = (move, type, data) =>
-    move + (
-      data.taken
+    move.join(" ") 
+      + (data.taken
         ? (type == "revive" ? `*${data.taker}, ${data.taken}` : "x")
-        : (data.promotion ? `^${data.promotion.new[0]}` : "")
-    )
+        : ""
+      )
+      + (data.promotion ? `^${data.promotion.new[0].toUpperCase()}` : "")
 
   logMove = (move, type, data) =>
   {
@@ -75,6 +83,7 @@ class GameInfo extends Element
       data: data
     })
     if (this.currentLog) {
+      (new LogSeparator()).appendTo(this.currentLog),
       (new LogMove(moveInfo)).appendTo(this.currentLog)
       this.currentLog = null
     }

@@ -1,0 +1,8 @@
+{
+  "instructions": [
+    "### Build instructions",
+    "To build the project locally, run `yarn && yarn build` if you are using yarn, or `npm install && npm run build`. The project will be built into `dist` directory.",
+    "A working demo (playable locally, no multiplayer yet) can be found [here](https://ivanovsaleksejs.github.io/lautari/).",
+    "---"
+  ]
+}

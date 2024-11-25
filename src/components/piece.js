@@ -124,8 +124,8 @@ class Piece extends Element
 
   checkPromotion = _ =>
   {
-    if (this.position == config.promotions.ranger.position) {
-      this.role = "ranger"
+    if (this.position == config.promotions.rider.position) {
+      this.role = "rider"
     }
     if (this.position == config.promotions.sentinel.position && !state.sentinels[["black", "white"][this.owner]]) {
       this.role = "sentinel"
@@ -152,7 +152,7 @@ class Piece extends Element
       data.promotion = {old: oldRole, new: this.role}
     }
     
-    state.gameInfo.logMove([oldPosition, position], "move", data)
+    state.gameInfo.logMove([oldPosition.toLowerCase(), position.toLowerCase()], "move", data)
     this.active = false
 
     state.game.changePlayer()
@@ -209,7 +209,7 @@ class Piece extends Element
     state.game.buttonPopup.appendTo(this.node.parentNode)
   }
 
-  checkHorsemanPromotion = _ =>
+  checkInfantryPromotion = _ =>
   {
     if (this.role != "pawn") {
       return false
@@ -240,18 +240,18 @@ class Piece extends Element
   {
     let lastMove = state.gameInfo.log[state.gameInfo.log.length - 1]
     let neighbours = state.game.getNeighbourCells(this.position)
-    return lastMove.data && lastMove.data.taken && neighbours.indexOf(lastMove.move[1]) !== -1
+    return lastMove.data && lastMove.data.taken && neighbours.indexOf(lastMove.move[1].toUpperCase()) !== -1
   }
 
-  promoteHorseman = _ =>
+  promoteInfantry = _ =>
   {
     state.game.buttonPopup.remove()
     let oldRole = this.role
-    this.role = "horseman"
+    this.role = "infantry"
     this.active = false
     let data = { promotion: { old: oldRole, new: this.role } }
 
-    state.gameInfo.logMove([this.position], "promote", data)
+    state.gameInfo.logMove([this.position.toLowerCase()], "promote", data)
     state.game.changePlayer()
   }
 
@@ -272,7 +272,7 @@ class Piece extends Element
     state.revived = taken
     this.active = false
     
-    state.gameInfo.logMove([this.position], "revive", {taker: lastMove.move[0], taken: lastMove.move[1]})
+    state.gameInfo.logMove([this.position.toLowerCase()], "revive", {taker: lastMove.move[0], taken: lastMove.move[1]})
     state.gameInfo.center[taken.owner ? "white" : "black"] = state.gameInfo.centerBackup[taken.owner ? "white" : "black"]
     state.gameInfo.centerBackup[taken.owner ? "white" : "black"] = 0
     state.game.changePlayer()
@@ -281,8 +281,8 @@ class Piece extends Element
   makeActive = _ =>
   {
     this.showAllowed()
-    if (this.checkHorsemanPromotion()) {
-      this.showPopupButton(this.promoteHorseman, "Promote")
+    if (this.checkInfantryPromotion()) {
+      this.showPopupButton(this.promoteInfantry, "Promote")
     }
     if (this.role == "sentinel" && this.checkLastMoveTaken()) {
       this.showPopupButton(this.revive, "Revive")
