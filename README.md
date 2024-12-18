@@ -44,7 +44,7 @@ If a piece reaches the Rider promotion cell (a circular cell on the left side of
 
 ### Sentinel
 
-If a piece reaches the Sentinel promotion cell (a circular cell on the right side of the center area, marked by a +), it is promoted to a Sentinel automatically, also without requiring a turn. The Sentinel piece is marked by a + symbol and can move one step.
+If a piece reaches the Sentinel promotion cell (a circular cell on the right side of the center area, marked by a +), it is promoted to a Sentinel automatically, also without requiring a turn. The Sentinel piece is marked by a + symbol and can move up to 2 steps.
 
 ![Sentinel](src/images/sentinel.png)
 
@@ -52,7 +52,7 @@ If a piece reaches the Sentinel promotion cell (a circular cell on the right sid
 
 ### Sentinel feature
 
-The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was adjacent to the Sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel.
+The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was in reach of the Sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel.
 
 https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2
 
@@ -66,6 +66,14 @@ The main objective of the game is to gain control of the center. This is accompl
 
 If either of the two pieces in the inner circle is captured and then revived by a Sentinel, the victory counter does not reset. However, if any of these pieces is moved, captured, and not revived, the counter resets.
 
+The winner gets :[position_victory_points points while the loser gets 0 points.
+
+---
+
+Domination victory
+
+The game can be won by capturing all opponents pieces, provided that the player still has more than 7 pieces left. In such case, the winner is granted with :domination_victory_points points while the loser gets 0 points.
+
 ### Draw
 
-A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree.
+A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree. If draw is called or declared automatically, both players receive :draw_points points.

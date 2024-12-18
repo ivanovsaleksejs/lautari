@@ -125,6 +125,9 @@ class Piece extends Element
   checkPromotion = _ =>
   {
     if (this.position == config.promotions.rider.position) {
+      if (this.role == "sentinel") {
+        state.sentinels[["black", "white"][this.owner]] = false
+      }
       this.role = "rider"
     }
     if (this.position == config.promotions.sentinel.position && !state.sentinels[["black", "white"][this.owner]]) {
@@ -239,7 +242,7 @@ class Piece extends Element
   checkLastMoveTaken = _ =>
   {
     let lastMove = state.gameInfo.log[state.gameInfo.log.length - 1]
-    let neighbours = state.game.getNeighbourCells(this.position)
+    let neighbours = this.allowedCells(this.position)
     return lastMove.data && lastMove.data.taken && neighbours.indexOf(lastMove.move[1].toUpperCase()) !== -1
   }
 
@@ -259,13 +262,13 @@ class Piece extends Element
   {
     state.game.buttonPopup.remove()
     let lastMove = state.gameInfo.log[state.gameInfo.log.length - 1]
-    let taker = state.cellsData[lastMove.move[1]].piece
+    let taker = state.cellsData[lastMove.move[1].toUpperCase()].piece
     let taken = state.taken[["black", "white"][~~!taker.owner]].pop()
 
-    taker.position = lastMove.move[0]
-    taken.position = lastMove.move[1]
-    state.cellsData[lastMove.move[0]].piece = taker
-    state.cellsData[lastMove.move[1]].piece = taken
+    taker.position = lastMove.move[0].toUpperCase()
+    taken.position = lastMove.move[1].toUpperCase()
+    state.cellsData[lastMove.move[0].toUpperCase()].piece = taker
+    state.cellsData[lastMove.move[1].toUpperCase()].piece = taken
     
     taken.taken = false
     taken.revived = true

@@ -131,45 +131,60 @@ class Game extends Element
           let turns = state.gameInfo.center[color] + 1
 
           state.gameInfo.center[color] = turns
-          state.gameInfo.infoTable.generalInfo.status.node.innerText = `${capitalize(color)} holds center for ${turns} turn${turns > 1 ? "s" : ""}`
 
-          if (state.gameInfo.center[color] == 1) {
-            return {winner: centerOwner}
+          if (state.gameInfo.center[color] >= 1 && (!centerOwner || centerOwner == state.activePlayer || centerOwner && turns > 1)) {
+            return { winner: centerOwner }
           }
         }
       } else {
         state.gameInfo.center["white"] = 0
-        state.gameInfo.center["white"] = 0
-        state.gameInfo.infoTable.generalInfo.status.node.innerText = ""
+        state.gameInfo.center["black"] = 0
       }
     }
     return null
   }
 
+  checkDominationVictory = _ =>
+    (state.taken["white"].length > 14 && state.taken["black"].length < config.resultsConditions.dominationVictory)
+      ||
+    (state.taken["black"].length > 14 && state.taken["white"].length < config.resultsConditions.dominationVictory)
+      ? { winner: state.taken["black"].length > 14 }
+      : null
+
   checkDraw = _ =>
-  {
-    return state.taken["white"].length > 12 || state.taken["black"].length > 12
-  }
+    (state.taken["white"].length > 12 && state.taken["black"].length > config.resultsConditions.dominationVictory - 1)
+      ||
+    (state.taken["black"].length > 12 && state.taken["white"].length > config.resultsConditions.dominationVictory - 1)
 
   changePlayer = _ =>
   {
     this.clearAllowed()
+    let result = null
     state.activePiece = null
     if (state.revived && state.revived.owner != state.activePlayer) {
       state.revived.revived = false
       state.revived = null
     }
     state.activePlayer = ~~!state.activePlayer
-    if (state.activePlayer) {
-      let result = this.checkWinningPosition()
-      if (result && typeof result.winner !== "undefined") {
-        this.showPopup(`The winner is ${result.winner ? "White" : "Black"}!`)
-        this.endGame()
-      }
-      if (this.checkDraw()) {
-        this.showPopup(`It's a draw!`)
-        this.endGame()
-      }
+    result = this.checkDominationVictory()
+    let endGame = false
+    if (result && typeof result.winner !== "undefined") {
+      this.showPopup(`Domination victory!<br />The winner is ${result.winner ? "White" : "Black"}!<br />The winner gets ${config.resultsConditions.dominationVictoryPointsDisplay} points.`)
+      this.endGame()
+      endGame = true
+    }
+    result = this.checkWinningPosition()
+    if (result && typeof result.winner !== "undefined") {
+      this.showPopup(`Position victory!<br />The winner is ${result.winner ? "White" : "Black"}!<br />The winner gets ${config.resultsConditions.positionVictoryPoints} points.`)
+      this.endGame()
+      endGame = true
+    }
+    if (this.checkDraw()) {
+      this.showPopup(`It's a draw!<br />Each player gets ${config.resultsConditions.drawPointsDisplay} points.`)
+      this.endGame()
+      endGame = true
+    }
+    if (state.activePlayer && !endGame) {
       state.gameInfo.turn = state.gameInfo.turn + 1
     }
   }

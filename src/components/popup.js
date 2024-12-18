@@ -7,7 +7,7 @@ class Popup extends Element
   constructor(msg)
   {
     super()
-    this.children.msg.props = { innerText: msg }
+    this.children.msg.props = { innerHTML: msg }
   }
 
   children = {

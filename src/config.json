@@ -25,7 +25,15 @@
       "title": "+",
       "name": "sentinel",
       "position": "S11",
-      "steps": 1
+      "steps": 2
     }
+  },
+  "resultsConditions": {
+    "positionVictoryPoints": 2,
+    "dominationVictory": 8,
+    "dominationVictoryPoints": 0.5,
+    "dominationVictoryPointsDisplay": "½",
+    "drawPoints": 0.5,
+    "drawPointsDisplay": "½"
   }
 }

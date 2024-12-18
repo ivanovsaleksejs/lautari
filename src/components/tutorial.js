@@ -28,7 +28,11 @@ class Tutorial extends Element
             "rider_steps": config.promotions.rider.steps,
             "rider": capitalize(config.promotions.rider.name),
             "sentinel_title": config.promotions.sentinel.title,
-            "sentinel": capitalize(config.promotions.sentinel.name)
+            "sentinel_steps": config.promotions.sentinel.steps,
+            "sentinel": capitalize(config.promotions.sentinel.name),
+            "position_victory_points": config.resultsConditions.positionVictoryPoints,
+            "domination_victory_points": config.resultsConditions.dominationVictoryPointsDisplay,
+            "draw_points": config.resultsConditions.drawPointsDisplay
           })
         }
       }

@@ -16,18 +16,22 @@
     "![:rider](images/rider.png)",
     "---",
     "### Sentinel",
-    "If a piece reaches the :sentinel promotion cell (a circular cell on the right side of the center area, marked by a :sentinel_title), it is promoted to a :sentinel automatically, also without requiring a turn. The :sentinel piece is marked by a :sentinel_title symbol and can move one step.",
+    "If a piece reaches the :sentinel promotion cell (a circular cell on the right side of the center area, marked by a :sentinel_title), it is promoted to a :sentinel automatically, also without requiring a turn. The :sentinel piece is marked by a :sentinel_title symbol and can move up to :sentinel_steps steps.",
     "![Sentinel](images/sentinel.png)",
     "---",
     "### Sentinel feature",
-    "The :sentinel piece can revive a piece captured on the previous turn, provided the captured piece was adjacent to the :sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one :sentinel piece at a time. If a :sentinel is captured, the player may promote another piece to become a :sentinel.",
+    "The :sentinel piece can revive a piece captured on the previous turn, provided the captured piece was in reach of the :sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one :sentinel piece at a time. If a :sentinel is captured, the player may promote another piece to become a :sentinel.",
     ":video",
     "---",
     "### Main objective",
     "The main objective of the game is to gain control of the center. This is accomplished by placing a promoted piece in the center and positioning any two pieces in opposite cells within the inner circle. This configuration must remain intact for one turn to secure victory. For the black player, victory happens as soon as the configuration is made, since the turn ends after blacks move. The whites, however, must ensure that the blacks cannot disrupt the configuration during their turn - after the whites move and form the winning configuration, the blacks have a chance to take any of three pieces during the current turn. If they do not, the game is won by the whites. This rule balances the slight speed advantage whites have at the start of the game.",
     "![Winning position](images/winning.png)",
     "If either of the two pieces in the inner circle is captured and then revived by a :sentinel, the victory counter does not reset. However, if any of these pieces is moved, captured, and not revived, the counter resets.",
+    "The winner gets :position_victory_points points while the loser gets 0 points.",
+    "---",
+    "### Domination victory",
+    "The game can be won by capturing all opponents pieces, provided that the player still has more than 7 pieces left. In such case, the winner is granted with :domination_victory_points points while the loser gets 0 points.",
     "### Draw",
-    "A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree."
+    "A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree. If draw is called or declared automatically, both players receive :draw_points points."
   ]
 }

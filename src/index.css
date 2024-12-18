@@ -4,6 +4,8 @@
   --light: rgb(239 209 155);
   --lighter: rgb(236 217 183);
   --yellow: rgb(240 192 32);
+  --active-white: rgb(247 209 81);
+  --active-black: rgb(171 144 53);
   --light-green: rgb(128 240 128);
   --dark-green: rgb(32 192 32);
   --font-face: serif;
@@ -169,7 +171,10 @@ piece-element.white  {
 }
 piece-element.active {
   box-shadow: 0px 0px 15px;
-  background: var(--yellow);
+  background: var(--active-white);
+}
+piece-element.black.active {
+  background: var(--active-black);
 }
 button-popup {
   position: absolute;
