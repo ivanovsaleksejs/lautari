@@ -132,7 +132,7 @@ class Game extends Element
 
           state.gameInfo.center[color] = turns
 
-          if (state.gameInfo.center[color] >= 1 && (!centerOwner || centerOwner == state.activePlayer || centerOwner && turns > 1)) {
+          if (state.gameInfo.center[color] >= 1) {
             return { winner: centerOwner }
           }
         }
