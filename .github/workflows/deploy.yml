@@ -24,3 +24,4 @@ jobs:
           github_token: ${{ secrets.GH_PAGES_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+          cname: lautari.app
