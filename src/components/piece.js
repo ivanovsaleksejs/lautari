@@ -114,6 +114,12 @@ class Piece extends Element
     return !state.cellsData[cell].piece && allowed.indexOf(cell) !== -1
   }
 
+  isLegalTake = cell =>
+  {
+    let allowed = this.allowedCells(this.position)
+    return allowed.indexOf(cell) !== -1 && state.cellsData[cell].piece && state.cellsData[cell].piece.owner != this.owner
+  }
+
   showAllowed = _ =>
   {
     let allowed = this.allowedCells(this.position)
@@ -166,7 +172,7 @@ class Piece extends Element
     if (state.game.buttonPopup) {
       state.game.buttonPopup.remove()
     }
-    if (state.activePiece.isLegalMove(position)) {
+    if (this.isLegalMove(position)) {
       this.changePosition(position)
     }
     else if (state.cellsData[position].piece != null) {
@@ -175,7 +181,7 @@ class Piece extends Element
         state.activePiece = state.cellsData[position].piece
       }
       else {
-        if (!state.cellsData[position].piece.revived) {
+        if (this.isLegalTake(position) && !state.cellsData[position].piece.revived) {
           let taken = state.cellsData[position].piece
           taken.taken = true
 
