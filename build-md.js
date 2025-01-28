@@ -31,7 +31,9 @@ const processInstructions = async jsonFilePaths =>
           "sentinel_title": config.promotions.sentinel.title,
           "sentinel_steps": config.promotions.sentinel.steps,
           "sentinel": capitalize(config.promotions.sentinel.name),
+          "revive_range": config.promotions.sentinel.reviveSteps,
           "position_victory_points": config.resultsConditions.positionVictoryPoints,
+          "special_position_victory_points": config.resultsConditions.specialPositionVictoryPoints,
           "domination_victory_points": config.resultsConditions.dominationVictoryPointsDisplay,
           "draw_points": config.resultsConditions.drawPointsDisplay
         })

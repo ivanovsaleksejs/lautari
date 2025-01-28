@@ -62,7 +62,7 @@ class Game extends Element
   clearAllowed = _ =>
   {
     for (let cell in state.cellsData) {
-      state.cellsData[cell].cell.node.classList.remove('allowed')
+      state.cellsData[cell].cell.node.classList.remove('allowed', 'revive-allowed')
     }
   }
 
@@ -107,6 +107,7 @@ class Game extends Element
 
     if (centerPiece && centerPiece.role != "pawn") {
       let winningPosition = false
+      let winningPieces = {}
       let centerOwner = centerPiece.owner
       let neighbours = this.getNeighbourCells(config.centerFile)
 
@@ -120,6 +121,11 @@ class Game extends Element
 
           if (state.cellsData[opposite].piece && state.cellsData[opposite].piece.owner == centerOwner) {
             winningPosition = true
+            winningPieces = {
+              center: centerPiece.role, 
+              first: state.cellsData[neighbour].piece.role,
+              second: state.cellsData[opposite].piece.role
+            }
             break
           }
         }
@@ -127,19 +133,14 @@ class Game extends Element
 
       if (winningPosition) {
         if (centerOwner !== null) {
-          let color = centerOwner ? "white" : "black"
-          let turns = state.gameInfo.center[color] + 1
-
-          state.gameInfo.center[color] = turns
-
-          if (state.gameInfo.center[color] >= 1) {
-            return { winner: centerOwner }
+          return { 
+            winner: centerOwner,
+            points: winningPieces.center == "sentinel" && winningPieces.first == "rider" && winningPieces.second == "rider"
+              ? config.resultsConditions.specialPositionVictoryPoints
+              : config.resultsConditions.positionVictoryPoints
           }
         }
-      } else {
-        state.gameInfo.center["white"] = 0
-        state.gameInfo.center["black"] = 0
-      }
+      } 
     }
     return null
   }
@@ -175,7 +176,7 @@ class Game extends Element
     }
     result = this.checkWinningPosition()
     if (result && typeof result.winner !== "undefined") {
-      this.showPopup(`Position victory!<br />The winner is ${result.winner ? "White" : "Black"}!<br />The winner gets ${config.resultsConditions.positionVictoryPoints} points.`)
+      this.showPopup(`Position victory!<br />The winner is ${result.winner ? "White" : "Black"}!<br />The winner gets ${result.points} points.`)
       this.endGame()
       endGame = true
     }

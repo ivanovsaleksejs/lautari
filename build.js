@@ -23,6 +23,7 @@ build({
   platform: 'node'
 }).then(() => {
   ncp(path.join(srcDir, 'index.css'), path.join(distDir, 'index.css'))
+  ncp(path.join(srcDir, 'index_mobile.css'), path.join(distDir, 'index_mobile.css'))
   ncp(path.join(srcDir, 'images'), path.join(distDir, 'images'))
   ncp(path.join(srcDir, 'font.woff2'), path.join(distDir, 'font.woff2'))
   ncp(path.join(srcDir, 'index.html'), path.join(distDir, 'index.html'))

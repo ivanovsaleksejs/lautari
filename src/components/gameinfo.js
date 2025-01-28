@@ -64,10 +64,9 @@ class GameInfo extends Element
     }
   }
 
-  moveInfo = (move, type, data) =>
-    move.join(" ") 
+  moveInfo = (move, type, data) => move.join(" ") 
       + (data.taken
-        ? (type == "revive" ? `*${data.taker}, ${data.taken}` : "x")
+        ? (type == "revive" ? `+${data.taker},${data.taken}` : "x")
         : ""
       )
       + (data.promotion ? `^${data.promotion.new[0].toUpperCase()}` : "")

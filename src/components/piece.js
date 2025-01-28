@@ -75,10 +75,10 @@ class Piece extends Element
     return this.allowedCells(this.position).length > 0
   }
 
-  allowedCells = (position, step) =>
+  allowedCells = (position, step, isRevive = false) =>
   {
     let ret = []
-    let finalStep = step >= config.promotions[this.role].steps
+    let finalStep = step >= (isRevive ? config.promotions[this.role].reviveSteps : config.promotions[this.role].steps)
     let canJump = config.promotions[this.role].canJump
     if (!step || !finalStep) {
       let neighbours = state.game.getNeighbourCells(position)
@@ -92,7 +92,7 @@ class Piece extends Element
         )
       ret = neighbours
       for (let neighbour of (canJump && !finalStep ? neighbours : neighbours.filter(s => !this.occupiedCell(s)))) {
-        ret = [...new Set([...ret, ...this.allowedCells(neighbour, (step ?? 0) + 1)])]
+        ret = [...new Set([...ret, ...this.allowedCells(neighbour, (step ?? 0) + 1, isRevive)])]
       }
     }
     return ret.filter(this.allowedCell)
@@ -106,7 +106,19 @@ class Piece extends Element
 
   isRevived = cell => state.cellsData[cell].piece.revived
 
-  allowedCell = cell => this.existingCell(cell) && (!this.occupiedCell(cell) || (!this.hasOwnPiece(cell) && !this.isRevived(cell)))
+  hasImmunity = cell => config.promotions[state.cellsData[cell].piece.role].centerImmunity
+
+  allowedCell = cell => this.existingCell(cell)
+    && (
+      !this.occupiedCell(cell)
+      || (
+        !this.hasOwnPiece(cell)
+        && (
+          !this.isRevived(cell)
+          && (cell !== config.centerFile || (!this.hasImmunity(cell) || config.promotions[this.role].ignoreImmunity || state.revived))
+        )
+      )
+    )
 
   isLegalMove = cell =>
   {
@@ -125,6 +137,12 @@ class Piece extends Element
     let allowed = this.allowedCells(this.position)
     for (let cell in allowed) {
       state.cellsData[allowed[cell]].cell.node.classList.add('allowed')
+    }
+    if (this.role == "sentinel") {
+      let reviveAllowed = this.allowedCells(this.position, 0, true)
+      for (let cell in reviveAllowed) {
+        state.cellsData[reviveAllowed[cell]].cell.node.classList.add('revive-allowed')
+      }
     }
   }
 
@@ -156,11 +174,11 @@ class Piece extends Element
     let oldPosition =this.position
     this.position = position
     this.checkPromotion()
-  
+
     if (oldRole != this.role) {
       data.promotion = {old: oldRole, new: this.role}
     }
-    
+
     state.gameInfo.logMove([oldPosition.toLowerCase(), position.toLowerCase()], "move", data)
     this.active = false
 
@@ -188,12 +206,12 @@ class Piece extends Element
           if (taken.role == "sentinel") {
             state.sentinels[["black", "white"][taken.owner]] = false
           }
-          
+
           taken.role = "pawn"
           taken.previousPosition = position
           taken.position = "X" + (+state.taken[['black', 'white'][taken.owner]].length + 1)
           state.taken[['black', 'white'][taken.owner]].push(taken)
-          
+
           if (+position.slice(1) == 7 || +position.slice(1) == 8) {
             state.gameInfo.centerBackup[taken.owner ? "white" : "black"] = state.gameInfo.center[taken.owner ? "white" : "black"]
           }
@@ -248,8 +266,8 @@ class Piece extends Element
   checkLastMoveTaken = _ =>
   {
     let lastMove = state.gameInfo.log[state.gameInfo.log.length - 1]
-    let neighbours = this.allowedCells(this.position)
-    return lastMove.data && lastMove.data.taken && neighbours.indexOf(lastMove.move[1].toUpperCase()) !== -1
+    let neighbours = this.allowedCells(this.position, 0, true)
+    return lastMove.data && lastMove.data.taken && lastMove.type !== "revive" && neighbours.indexOf(lastMove.move[1].toUpperCase()) !== -1
   }
 
   promoteInfantry = _ =>
@@ -275,12 +293,15 @@ class Piece extends Element
     taken.position = lastMove.move[1].toUpperCase()
     state.cellsData[lastMove.move[0].toUpperCase()].piece = taker
     state.cellsData[lastMove.move[1].toUpperCase()].piece = taken
-    
+    if (lastMove.data.promotion && lastMove.data.promotion.old) {
+      taker.role = lastMove.data.promotion.old
+    }
+
     taken.taken = false
     taken.revived = true
     state.revived = taken
     this.active = false
-    
+
     state.gameInfo.logMove([this.position.toLowerCase()], "revive", {taker: lastMove.move[0], taken: lastMove.move[1]})
     state.gameInfo.center[taken.owner ? "white" : "black"] = state.gameInfo.centerBackup[taken.owner ? "white" : "black"]
     state.gameInfo.centerBackup[taken.owner ? "white" : "black"] = 0
