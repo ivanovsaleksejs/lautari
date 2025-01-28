@@ -7,7 +7,9 @@
   --active-white: rgb(247 209 81);
   --active-black: rgb(171 144 53);
   --light-green: rgb(128 240 128);
+  --light-blue: rgb(128 240 192);
   --dark-green: rgb(32 192 32);
+  --dark-blue: rgb(64 192 128);
   --font-face: serif;
 }
 body {
@@ -138,8 +140,14 @@ row:nth-child(2n-1) cell:nth-child(2n), row:nth-child(2n) cell:nth-child(2n+1), 
 segment.allowed, cell.allowed, rider.allowed, sentinel.allowed {
   background: var(--light-green);
 }
+segment.revive-allowed, cell.revive-allowed, rider.revive-allowed, sentinel.revive-allowed {
+  background: var(--light-blue);
+}
 row:nth-child(2n-1) cell:nth-child(2n).allowed, row:nth-child(2n) cell:nth-child(2n+1).allowed, segment.dark.allowed, halo.small.allowed {
   background: var(--dark-green);
+}
+row:nth-child(2n-1) cell:nth-child(2n).revive-allowed, row:nth-child(2n) cell:nth-child(2n+1).revive-allowed, segment.dark.revive-allowed, halo.small.revive-allowed {
+  background: var(--dark-blue);
 }
 segment:hover, halo.small:hover, cell:hover, row:nth-child(2n-1) cell:nth-child(2n):hover, row:nth-child(2n) cell:nth-child(2n+1):hover, rider:hover, sentinel:hover {
   background: var(--yellow);
