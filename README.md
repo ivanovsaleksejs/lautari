@@ -16,7 +16,7 @@ A working demo (playable locally, no multiplayer yet) can be found [here](https:
 
 In this game, two players face off in a strategic contest to control the center of the board. The game board consists of two starting positions (home area), each having three rows, five cells in each, and a center area where the most action occurs. The center area has one central cell surrounded by three circles, each containing 20 cells. The center area connected to the home areas with two additional rows.
 
-Each player begins the game with 15 pieces, called Pawn, arranged in three rows of five pieces each. One player controls the white pieces, while the other controls the black pieces. A Pawn can move one step to any adjacent cell that shares a common edge with its current position. The center cell is uniquely connected to all cells within the inner circle.
+Each player begins the game with 15 pieces, called Pawn, arranged in three rows of five pieces each. One player controls the white pieces, while the other controls the black pieces. The whites move first. A Pawn can move one step to any adjacent cell that shares a common edge with its current position. The center cell is uniquely connected to all cells within the inner circle.
 
 ![Pawn](src/images/pawn.png) ![Center cell](src/images/center.png)
 
@@ -44,7 +44,7 @@ If a piece reaches the Rider promotion cell (a circular cell on the left side of
 
 ### Sentinel
 
-If a piece reaches the Sentinel promotion cell (a circular cell on the right side of the center area, marked by a +), it is promoted to a Sentinel automatically, also without requiring a turn. The Sentinel piece is marked by a + symbol and can move up to 2 steps.
+If a piece reaches the Sentinel promotion cell (a circular cell on the right side of the center area, marked by a +), it is promoted to a Sentinel automatically, also without requiring a turn. The Sentinel piece is marked by a + symbol and can move up to 3 steps.
 
 ![Sentinel](src/images/sentinel.png)
 
@@ -52,28 +52,38 @@ If a piece reaches the Sentinel promotion cell (a circular cell on the right sid
 
 ### Sentinel feature
 
-The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was in reach of the Sentinel. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost. Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel.
+The Sentinel piece can revive a piece captured on the previous turn, provided the captured piece was in reach of the Sentinel revive range, which is 2. This revival undoes the previous turn, restoring the captured piece and moving the opponent's piece back to its previous position. The revived piece cannot be captured on the next turn, and any promotion it held before capture is lost - it's revived as a Pawn.
+
+---
+
+### Sentinel additional rules
+
+Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel. If a piece is on the Sentinel promotion cell when Sentinel is captured, it must step off the Sentinel promotion cell and then step back to get promoted to Sentinel. If a piece is captured on a Rider promotion cell, and then revived by Sentinel, it's revived as a regular Pawn and must step off the Rider promotion cell and then step back to get promoted to Rider. If, in such case, the opponents piece is promoted to a Rider, after reviving it's demoted to its previous role.
 
 https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2
 
 ---
 
-### Main objective
+### Sentinel immunity
 
-The main objective of the game is to gain control of the center. This is accomplished by placing a promoted piece in the center and positioning any two pieces in opposite cells within the inner circle. This configuration must remain intact for one turn to secure victory. For the black player, victory happens as soon as the configuration is made, since the turn ends after blacks move. The whites, however, must ensure that the blacks cannot disrupt the configuration during their turn - after the whites move and form the winning configuration, the blacks have a chance to take any of three pieces during the current turn. If they do not, the game is won by the whites. This rule balances the slight speed advantage whites have at the start of the game.
-
-![Winning position](src/images/winning.png)
-
-If either of the two pieces in the inner circle is captured and then revived by a Sentinel, the victory counter does not reset. However, if any of these pieces is moved, captured, and not revived, the counter resets.
-
-The winner gets :[position_victory_points points while the loser gets 0 points.
+Sentinel in the central cell (A cell) can only be captured by other Sentinel or a Rider. If a Sentinel in a central cell revives any piece, it losts its immunity for one turn.
 
 ---
 
-Domination victory
+### Main objective
 
-The game can be won by capturing all opponents pieces, provided that the player still has more than 7 pieces left. In such case, the winner is granted with :domination_victory_points points while the loser gets 0 points.
+The main objective of the game is to gain control of the center. This is accomplished by placing a promoted piece in the center and positioning any two pieces in opposite cells within the inner circle.
+
+![Winning position](src/images/winning.png)
+
+The winner gets 2 points while the loser gets 0 points. If a winning formation is composed of a Sentinel in the center and two Rider pieces in the opposite cells of the inner circle, then the winner gets 3 points. If a central piece in the formation is a Pawn then the victory is not granted, as the Pawn is not promoted. However, this position allows player to promote the central Pawn on the next turn, which, if done, will instantly grant victory.
+
+---
+
+### Domination victory
+
+The game can also be won by capturing all opponents pieces, provided that the player still has more than 7 pieces left. In such case, the winner is granted with 1 points while the loser gets 0 points.
 
 ### Draw
 
-A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree. If draw is called or declared automatically, both players receive :draw_points points.
+A draw is declared automatically if a player has fewer than three pieces remaining, as they can no longer achieve victory. A draw can also be declared at any time if both players agree. If draw is called or declared automatically, both players receive ½ points.
