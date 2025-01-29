@@ -204,6 +204,13 @@ infotable {
   display: flex;
   flex-direction: column;
 }
+generalinfo {
+  display: flex;
+  flex-direction: column;
+}
+generalinfo input {
+  width: 30em;
+}
 turnlog {
   display: flex;
   flex-direction: column;

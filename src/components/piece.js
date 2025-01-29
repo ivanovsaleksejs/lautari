@@ -11,15 +11,21 @@ class Piece extends Element
 
   elementClass = PieceElement
 
-  constructor(n, state)
+  constructor(n, state, position = null, role = "pawn", color = null)
   {
     super()
-    this.color = ~~(n > 14)
-    this._role = "pawn"
+    this.color = color !== null 
+      ? color 
+      // For initial position, first 15 pieces are black
+      : ~~(n > 14) 
+    this._role = role
     this.taken = false
     this.owner = this.color
     this.props.className = this.color ? "white" : "black"
-    this._position = config.files.slice(3, -3)[n%5] + (n > 14 ? 3 - ~~((n-15)/5) : 14 - ~~(n/5))
+    this._position = position
+      ? position
+      // Place piece in home area
+      : config.files.slice(3, -3)[n%5] + (n > 14 ? 3 - ~~((n-15)/5) : 14 - ~~(n/5))
     this.updatePosition(this._position)
   }
 
@@ -64,7 +70,10 @@ class Piece extends Element
   postRender = {
     attr: piece =>
     {
-      setTimeout(_ => piece.node.setAttribute("position", piece.position), 1)
+      setTimeout(_ => {
+        piece.role = piece._role
+        piece.node.setAttribute("position", piece.position)
+      }, 1)
     }
   }
 

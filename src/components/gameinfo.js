@@ -2,6 +2,7 @@ import Element from 'element'
 import state from '../state.js'
 import config from '../config.json'
 import Tutorial from './tutorial.js'
+import initGame from '../game.js'
 
 class LogMove extends Element
 {
@@ -42,6 +43,7 @@ class GameInfo extends Element
   {
     super()
     this._turn = 1
+    this._hash = ""
     this.currentLog = null
     this.log = []
   }
@@ -53,6 +55,13 @@ class GameInfo extends Element
         this._turn = val
       },
       get: _ => { return this._turn }
+    },
+    hash: {
+      set: val => {
+        this.infoTable.generalInfo.hash.node.value = val
+        this._hash = val
+      },
+      get: _ => { return this._hash }
     }
   }
 
@@ -82,6 +91,9 @@ class GameInfo extends Element
       this.currentLog = new LogEntry(moveInfo)
       this.currentLog.appendTo(this.infoTable.turnLog)
     }
+    this.hash = state.bot.encodePosition(state.cellsData, ~~!state.activePlayer)
+    //console.log(this.hash)
+    //console.log(state.bot.decodePosition(this.hash))
   }
 
   showTutorial = _ =>
@@ -103,8 +115,15 @@ class GameInfo extends Element
       children: {
         generalInfo: {
           children: {
+            hash: {
+              name: "input",
+              listeners: {
+                change: e => {
+                  setTimeout(_ => {initGame(e.target.value)}, 10)
+                }
+              }
+            },
             turnNumber: { props: { innerText: 1 } },
-            status: {},
           }
         },
         turnLog: {}

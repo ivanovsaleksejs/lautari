@@ -55,8 +55,30 @@ class Game extends Element
       children: {
         white: new PlayerSide(1)
       }
-    },
-    ...Object.fromEntries(Object.entries(Array(30).fill().map((_,i) => new Piece(i, state))))
+    }
+  }
+
+  constructor(gameData)
+  {
+    super()
+    let pieces = null, player = 1
+    if (gameData) {
+      [player, pieces] = gameData
+    }
+    let piecesInfo = null
+    if (pieces) {
+      piecesInfo = Object.entries(pieces.map(
+        (v, i) => new Piece(i, state, v.cell, v.role, +(v.color == "white"))
+      ))
+    }
+    else {
+      piecesInfo = Object.entries(Array(30).fill().map(
+        (_,i) => new Piece(i, state))
+      )
+    }
+    Object.assign(this.children, Object.fromEntries(piecesInfo))
+    state.activePlayer = player
+
   }
 
   clearAllowed = _ =>

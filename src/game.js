@@ -2,6 +2,7 @@ import Game from './components/game.js'
 import GameInfo from './components/gameinfo.js'
 import state from './state.js'
 import config from './config.json'
+import Bot from './bot.js'
 
 const initFile = (n, file, lastFile, longFile, horiz) =>
   [
@@ -33,8 +34,15 @@ const initCells = _ =>
     )
   )
 
-const initGame = _ =>
+const initGame = hash =>
 {
+  state.bot = new Bot
+
+  let gameData = null
+  if (hash) {
+    gameData = state.bot.decodePosition(hash)  
+  }
+
   state.cellsData = initCells()
   state.taken = {
     black: [],
@@ -50,13 +58,23 @@ const initGame = _ =>
   state.revived = null
   state.active = true
 
-  state.game = new Game
+  if (state.game) {
+    state.game.node.remove()
+    state.gameInfo.node.remove()
+
+    delete state.game
+    delete state.gameInfo
+  }
+
+  state.game = new Game(gameData)
   state.game.appendTo(state.root)
+
 
   state.gameInfo = new GameInfo
   state.gameInfo.appendTo(state.root)
 
   state.gameInfo.turn = 1
+  //state.bot.encodePosition(state.cellsData, state.activePlayer)
 }
 
 export default initGame
