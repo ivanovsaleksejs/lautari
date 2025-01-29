@@ -1,7 +1,7 @@
 {
   "instructions": [
     "### How to play",
-    "In this game, two players face off in a strategic contest to control the center of the board. The game board consists of two starting positions (home area), each having three rows, five cells in each, and a center area where the most action occurs. The center area has one central cell surrounded by three circles, each containing 20 cells. The center area connected to the home areas with two additional rows.",
+    "In this game, two players face off in a strategic contest to control the center of the board. The game board consists of two starting positions (home area), each having three rows, five cells in each, and a center area where the most action occurs. The center area has one central cell surrounded by three circles, each containing 20 cells. The center area connected to the home areas with two additional arcs, each containing 5 cells.",
     "Each player begins the game with 15 pieces, called :pawn, arranged in three rows of five pieces each. One player controls the white pieces, while the other controls the black pieces. The whites move first. A :pawn can move one step to any adjacent cell that shares a common edge with its current position. The center cell is uniquely connected to all cells within the inner circle.",
     "![Pawn](images/pawn.png) ![Center cell](images/center.png)",
     "If a piece moves to a cell occupied by an opponent's piece, that piece is captured and removed from the board. Any piece can capture any other piece. There are no forced takes, meaning that the player can choose not to capture a piece even if they have that option.",

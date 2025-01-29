@@ -42,14 +42,6 @@ class GameInfo extends Element
   {
     super()
     this._turn = 1
-    this.center = {
-      white: 0,
-      black: 0
-    }
-    this.centerBackup = {
-      white: 0,
-      black: 0
-    }
     this.currentLog = null
     this.log = []
   }

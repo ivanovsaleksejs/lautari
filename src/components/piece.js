@@ -212,10 +212,6 @@ class Piece extends Element
           taken.position = "X" + (+state.taken[['black', 'white'][taken.owner]].length + 1)
           state.taken[['black', 'white'][taken.owner]].push(taken)
 
-          if (+position.slice(1) == 7 || +position.slice(1) == 8) {
-            state.gameInfo.centerBackup[taken.owner ? "white" : "black"] = state.gameInfo.center[taken.owner ? "white" : "black"]
-          }
-
           this.changePosition(position, true)
         }
       }
@@ -303,8 +299,6 @@ class Piece extends Element
     this.active = false
 
     state.gameInfo.logMove([this.position.toLowerCase()], "revive", {taker: lastMove.move[0], taken: lastMove.move[1]})
-    state.gameInfo.center[taken.owner ? "white" : "black"] = state.gameInfo.centerBackup[taken.owner ? "white" : "black"]
-    state.gameInfo.centerBackup[taken.owner ? "white" : "black"] = 0
     state.game.changePlayer()
   }
 
