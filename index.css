@@ -199,6 +199,20 @@ button-popup button {
 }
 game-info {
   margin-left: 0.8em;
+  display: flex;
+}
+evaluation {
+  height: 100%;
+  width: 1em;
+  border: 1px solid var(--darker);
+  background: var(--lighter);
+  display: flex;
+}
+evaluation blacks {
+  width: 1em;
+  background: var(--darker);
+  height: 50%;
+  transition: all .7s ease-in-out;
 }
 infotable {
   display: flex;
