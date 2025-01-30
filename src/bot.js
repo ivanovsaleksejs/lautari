@@ -1,3 +1,5 @@
+import state from './state.js'
+
 class Bot
 {
   cellOrder = [
@@ -12,10 +14,31 @@ class Bot
   ]
 
   pieceCodes = {
-    "white pawn": "A", "black pawn": "B",
-    "white infantry": "C", "black infantry": "D",
-    "white rider": "E", "black rider": "F",
-    "white sentinel": "G", "black sentinel": "H"
+    "white pawn": "A",
+    "black pawn": "B",
+    "white infantry": "C",
+    "black infantry": "D",
+    "white rider": "E",
+    "black rider": "F",
+    "white sentinel": "G",
+    "black sentinel": "H"
+  }
+
+  roleWeights = {
+    "pawn": 0,
+    "infantry": 2,
+    "rider": 4,
+    "sentinel": 6
+  }
+
+  upgradeProximityWeights = {
+    "R5": 3,
+    "R6": 2, "B5": 2, "B10": 2,
+    "R7": 1, "B6": 1, "B9": 1, "D5": 1, "D10": 1,
+    "S10": 4,
+    "S9": 3, "L5": 3, "L10": 3,
+    "S8": 2, "L6": 2, "L9": 2, "K5": 2, "K10": 2,
+    "A": 1, "L7": 1, "L8": 1, "K6": 1, "K9": 1, "I5": 1, "I10": 1
   }
 
   constructor()
@@ -25,9 +48,7 @@ class Bot
     )
   }
 
-  encodePosition = (pieces, currentPlayer) =>
-  {
-    pieces = Object.entries(pieces)
+  parsePosition = pieces => Object.entries(pieces)
         .filter(([_, value]) => value.piece !== null)
         .map(([cell, v]) => (
           {
@@ -37,6 +58,10 @@ class Bot
           }
         ))
         .sort((a, b) => this.cellOrder.indexOf(a.cell) - this.cellOrder.indexOf(b.cell))
+
+  encodePosition = (pieces, currentPlayer) =>
+  {
+    pieces = this.parsePosition(pieces)
 
     let hash = ""
     let prevIndex = 0
@@ -54,7 +79,7 @@ class Bot
     return currentPlayer + hash
   }
 
-  decodePosition = hash => 
+  decodePosition = hash =>
   {
     let pieces = []
     let i = 0, currentIndex = 0, player = +hash.slice(0, 1)
@@ -80,14 +105,45 @@ class Bot
     return [player, pieces]
   }
 
-  calculatePosition = position =>
-  {
+  checkUpgradeProximity
 
+  calculatePiece = (role, position, color, cellData) =>
+  {
+    let weight = 0
+    let [file, line] = [position.slice(0, 1), +position.slice(1)]
+    let lineWeight = file == "A"
+      ? this.roleWeights[role] * 2
+      : line > 7 ? (14 - line) : line - 1
+    weight += lineWeight
+
+    let roleWeight = this.roleWeights[role]
+
+    if (role == "pawn" && state.cellsData[position].piece.checkInfantryPromotion()) {
+      roleWeight += 1
+    }
+
+    if (role != "rider" && role != "sentinel" && this.upgradeProximityWeights[position]) {
+      roleWeight += this.upgradeProximityWeights[position]
+    }
+
+    weight += roleWeight
+
+    return color == "white" ? weight : -weight
   }
 
-  calculatePiece = piece =>
+  calculatePosition = pieces =>
   {
+    let position = 0
+    let playersWeights = [0, 0]
+    pieces = this.parsePosition(pieces)
+    for (let piece of pieces) {
+      let color = ~~(piece.color == "white")
+      let weight = this.calculatePiece(piece.role, piece.cell, piece.color, pieces)
+      position += weight
+      playersWeights[color] += (color * 2 - 1) * weight
+    }
 
+    return [position, playersWeights]
   }
 }
 

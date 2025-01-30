@@ -40,7 +40,7 @@ const initGame = hash =>
 
   let gameData = null
   if (hash) {
-    gameData = state.bot.decodePosition(hash)  
+    gameData = state.bot.decodePosition(hash)
   }
 
   state.cellsData = initCells()

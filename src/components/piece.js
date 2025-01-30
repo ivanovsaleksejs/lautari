@@ -14,10 +14,10 @@ class Piece extends Element
   constructor(n, state, position = null, role = "pawn", color = null)
   {
     super()
-    this.color = color !== null 
-      ? color 
+    this.color = color !== null
+      ? color
       // For initial position, first 15 pieces are black
-      : ~~(n > 14) 
+      : ~~(n > 14)
     this._role = role
     this.taken = false
     this.owner = this.color

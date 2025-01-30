@@ -144,7 +144,7 @@ class Game extends Element
           if (state.cellsData[opposite].piece && state.cellsData[opposite].piece.owner == centerOwner) {
             winningPosition = true
             winningPieces = {
-              center: centerPiece.role, 
+              center: centerPiece.role,
               first: state.cellsData[neighbour].piece.role,
               second: state.cellsData[opposite].piece.role
             }
@@ -155,14 +155,14 @@ class Game extends Element
 
       if (winningPosition) {
         if (centerOwner !== null) {
-          return { 
+          return {
             winner: centerOwner,
             points: winningPieces.center == "sentinel" && winningPieces.first == "rider" && winningPieces.second == "rider"
               ? config.resultsConditions.specialPositionVictoryPoints
               : config.resultsConditions.positionVictoryPoints
           }
         }
-      } 
+      }
     }
     return null
   }

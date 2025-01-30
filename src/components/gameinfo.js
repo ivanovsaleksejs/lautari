@@ -65,12 +65,12 @@ class GameInfo extends Element
     }
   }
 
-  moveInfo = (move, type, data) => move.join(" ") 
+  moveInfo = (move, type, data) => move.join(" ")
       + (data.taken
-        ? (type == "revive" ? `+${data.taker},${data.taken}` : "x")
+        ? (type == "revive" ? ("+" + data.taker + "," + data.taken) : "x")
         : ""
       )
-      + (data.promotion ? `^${data.promotion.new[0].toUpperCase()}` : "")
+      + (data.promotion ? ("^" + data.promotion.new[0].toUpperCase()) : "")
 
   logMove = (move, type, data) =>
   {
@@ -92,6 +92,9 @@ class GameInfo extends Element
       this.currentLog.appendTo(this.infoTable.turnLog)
     }
     this.hash = state.bot.encodePosition(state.cellsData, ~~!state.activePlayer)
+    let evaluation = state.bot.calculatePosition(state.cellsData)
+    let blacksEvaluation = evaluation[1][0] * 1020/(evaluation[1][0] + evaluation[1][1])
+    state.gameInfo.evaluation.blacks.node.style.height = blacksEvaluation + "px"
     //console.log(this.hash)
     //console.log(state.bot.decodePosition(this.hash))
   }
@@ -102,17 +105,22 @@ class GameInfo extends Element
   }
 
   children = {
-    options: {
+    evaluation: {
       children: {
-        help: {
-          listeners: {
-            click: _ => { this.showTutorial() }
-          }
-        }
+        blacks: {}
       }
     },
     infoTable: {
       children: {
+        options: {
+          children: {
+            help: {
+              listeners: {
+                click: _ => { this.showTutorial() }
+              }
+            }
+          }
+        },
         generalInfo: {
           children: {
             hash: {
