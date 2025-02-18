@@ -60,8 +60,6 @@ The Sentinel piece can revive a piece captured on the previous turn, provided th
 
 Each player may only have one Sentinel piece at a time. If a Sentinel is captured, the player may promote another piece to become a Sentinel. If a piece is on the Sentinel promotion cell when Sentinel is captured, it must step off the Sentinel promotion cell and then step back to get promoted to Sentinel. If a piece is captured on a Rider promotion cell, and then revived by Sentinel, it's revived as a regular Pawn and must step off the Rider promotion cell and then step back to get promoted to Rider. If, in such case, the opponents piece is promoted to a Rider, after reviving it's demoted to its previous role.
 
-https://github.com/user-attachments/assets/f6eefc4e-6e49-4a94-9399-f8dc68b88fd2
-
 ---
 
 ### Sentinel immunity
