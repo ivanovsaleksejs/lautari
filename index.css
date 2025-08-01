@@ -7,13 +7,19 @@
   --active-white: rgb(247 209 81);
   --active-black: rgb(171 144 53);
   --light-green: rgb(128 240 128);
-  --light-blue: rgb(128 240 192);
+  --light-blue: rgb(128 192 240);
   --dark-green: rgb(32 192 32);
-  --dark-blue: rgb(64 192 128);
+  --dark-blue: rgb(64 128 192);
   --font-face: serif;
 }
-body {
+body, root, content, rightside {
   display: flex;
+}
+root, rightside {
+  flex-direction: column;
+}
+content {
+  flex-direction: row;
 }
 game {
   width: 600px;
@@ -200,6 +206,7 @@ button-popup button {
 game-info {
   margin-left: 0.8em;
   display: flex;
+  flex: 1;
 }
 evaluation {
   height: 100%;
