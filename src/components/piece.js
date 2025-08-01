@@ -173,6 +173,10 @@ class Piece extends Element
   {
     state.cellsData[this.position].piece = null
     state.cellsData[position].piece = this
+    let [file, rank] = (s => [s.slice(0,1), s.slice(1)])(this.position)
+    if (state.homeRowsMoved[this.owner][rank] && config.files.slice(3,8).indexOf(file) != -1) {
+      state.homeRowsMoved[this.owner][rank][config.files.slice(3,8).indexOf(file)] = true
+    }
 
     let data = {}
     if (taken) {
@@ -248,7 +252,7 @@ class Piece extends Element
     }
 
     let [file, rank] = (s => [s.slice(0,1), s.slice(1)])(this.position)
-    if (file != "A" && (rank < 4 && this.owner || rank > 11)) {
+    if (file != "A" && (state.homeRowsMoved[this.owner][rank] && !state.homeRowsMoved[this.owner][rank].every(Boolean))) {
       return false
     }
 
@@ -268,7 +272,7 @@ class Piece extends Element
     }
   }
 
-  checkLastMoveTaken = _ =>
+  canRevive = _ =>
   {
     let lastMove = state.gameInfo.log[state.gameInfo.log.length - 1]
     let neighbours = this.allowedCells(this.position, 0, true)
@@ -317,7 +321,7 @@ class Piece extends Element
     if (this.checkInfantryPromotion()) {
       this.showPopupButton(this.promoteInfantry, "Promote")
     }
-    if (this.role == "sentinel" && this.checkLastMoveTaken()) {
+    if (this.role == "sentinel" && this.canRevive()) {
       this.showPopupButton(this.revive, "Revive")
     }
     state.activePiece = this
@@ -332,7 +336,7 @@ class Piece extends Element
 
     if (!state.activePiece) {
       state.game.clearAllowed()
-      if (state.activePlayer == this.owner && this.canMove()) {
+      if (state.activePlayer == this.owner && (this.canMove() || this.checkInfantryPromotion())) {
         this.makeActive()
       }
     } else {

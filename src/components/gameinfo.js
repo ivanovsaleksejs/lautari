@@ -35,6 +35,11 @@ class LogEntry extends Element
   }
 }
 
+class Chat extends Element
+{
+  name = "chat"
+}
+
 class GameInfo extends Element
 {
   name = "game-info"
@@ -104,6 +109,10 @@ class GameInfo extends Element
     (new Tutorial).appendTo(state.root)
   }
 
+  /*newRoom = _ => { state.ws.createRoom() }
+
+  joinRoom = id => { state.ws.joinRoom(id) } */
+
   children = {
     evaluation: {
       children: {
@@ -118,7 +127,23 @@ class GameInfo extends Element
               listeners: {
                 click: _ => { this.showTutorial() }
               }
-            }
+            }/*,
+            newRoom: {
+              props: { innerText: "New room" },
+              listeners: { click: _ => this.newRoom()  }
+            },
+            joinRoom: {
+              children: {
+                roomId: {
+                  name: "input",
+                  listeners: {
+                    change: e => {
+                      this.joinRoom(e.target.value)
+                    }
+                  }
+                },
+              }
+            }*/
           }
         },
         generalInfo: {
@@ -134,7 +159,8 @@ class GameInfo extends Element
             turnNumber: { props: { innerText: 1 } },
           }
         },
-        turnLog: {}
+        turnLog: {},
+        chat: new Chat
       }
     }
   }

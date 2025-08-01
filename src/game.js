@@ -1,8 +1,10 @@
+import Root from './components/root.js'
 import Game from './components/game.js'
 import GameInfo from './components/gameinfo.js'
 import state from './state.js'
 import config from './config.json'
 import Bot from './bot.js'
+import WebSocketClient from './ws.js'
 
 const initFile = (n, file, lastFile, longFile, horiz) =>
   [
@@ -36,6 +38,11 @@ const initCells = _ =>
 
 const initGame = hash =>
 {
+
+  if (!state.ws) {
+    //state.ws = new WebSocketClient(config.serverUrl)
+  }
+
   state.bot = new Bot
 
   let gameData = null
@@ -52,6 +59,18 @@ const initGame = hash =>
     black: false,
     white: false
   }
+  state.homeRowsMoved = {
+    [0]: {
+      [12]: Array(5).fill(false),
+      [13]: Array(5).fill(false),
+      [14]: Array(5).fill(false),
+    },
+    [1]: {
+      [3]: Array(5).fill(false),
+      [2]: Array(5).fill(false),
+      [1]: Array(5).fill(false),
+    }
+  }
 
   state.activePiece = null
   state.activePlayer = 1
@@ -67,11 +86,15 @@ const initGame = hash =>
   }
 
   state.game = new Game(gameData)
-  state.game.appendTo(state.root)
-
 
   state.gameInfo = new GameInfo
-  state.gameInfo.appendTo(state.root)
+
+  if (!state.root) {
+    state.root = new Root
+  }
+  state.root.children.content.children.game = state.game
+  state.root.children.content.children.rightSide.children.info = state.gameInfo
+  state.root.appendTo(state.document)
 
   state.gameInfo.turn = 1
   //state.bot.encodePosition(state.cellsData, state.activePlayer)

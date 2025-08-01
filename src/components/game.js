@@ -196,16 +196,18 @@ class Game extends Element
       this.endGame()
       endGame = true
     }
-    result = this.checkWinningPosition()
-    if (result && typeof result.winner !== "undefined") {
-      this.showPopup(`Position victory!<br />The winner is ${result.winner ? "White" : "Black"}!<br />The winner gets ${result.points} points.`)
-      this.endGame()
-      endGame = true
-    }
-    if (this.checkDraw()) {
-      this.showPopup(`It's a draw!<br />Each player gets ${config.resultsConditions.drawPointsDisplay} points.`)
-      this.endGame()
-      endGame = true
+    else {
+      result = this.checkWinningPosition()
+      if (result && typeof result.winner !== "undefined") {
+        this.showPopup(`Position victory!<br />The winner is ${result.winner ? "White" : "Black"}!<br />The winner gets ${result.points} points.`)
+        this.endGame()
+        endGame = true
+      }
+      if (this.checkDraw()) {
+        this.showPopup(`It's a draw!<br />Each player gets ${config.resultsConditions.drawPointsDisplay} points.`)
+        this.endGame()
+        endGame = true
+      }
     }
     if (state.activePlayer && !endGame) {
       state.gameInfo.turn = state.gameInfo.turn + 1

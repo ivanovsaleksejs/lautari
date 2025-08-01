@@ -40,5 +40,6 @@
     "dominationVictoryPointsDisplay": "1",
     "drawPoints": 0.5,
     "drawPointsDisplay": "½"
-  }
+  },
+  "serverUrl": "ws://localhost:8080"
 }
