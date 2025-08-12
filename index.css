@@ -269,6 +269,7 @@ popup {
   max-height: 85vh;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 2;
 }
 popup closebutton:after {
   content: "X";
