@@ -18,7 +18,15 @@ class Cell extends Element
     click: _ =>
     {
       let position = this.position
-      if (state.activePiece) {
+      if (state.cellsData[position].piece && state.cellsData[position].piece.owner == state.activePlayer && (!state.activePiece || state.activePiece.position !== position)) {
+        state.game.clearAllowed()
+        if (state.activePiece) {
+          state.activePiece.active = false
+        }
+        state.activePiece = null
+        state.cellsData[position].piece.makeActive()
+      }
+      else if (state.activePiece && state.activePiece.canMove(position)) {
         state.activePiece.movePiece(position)
       }
     }

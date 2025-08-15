@@ -354,6 +354,9 @@ class Piece extends Element
           }
           this.makeActive()
         }
+        else if (state.activePlayer != this.owner && state.activePiece) {
+          state.activePiece.movePiece(this.position)
+        }
       }
     }
   }
